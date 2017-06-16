@@ -64,6 +64,8 @@ public class JsonExportTask extends AsyncTask<Void, Integer, Integer> {
     public static final int BACKUP_LISTS = 2;
     public static final int BACKUP_MOVIES = 3;
 
+    public static final String UNICODE = "UTF-8";
+
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
             BACKUP_SHOWS,
@@ -359,7 +361,7 @@ public class JsonExportTask extends AsyncTask<Void, Integer, Integer> {
         int numExported = 0;
 
         Gson gson = new Gson();
-        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
+        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, UNICODE));
         writer.beginArray();
 
         while (shows.moveToNext()) {
@@ -483,7 +485,7 @@ public class JsonExportTask extends AsyncTask<Void, Integer, Integer> {
         int numExported = 0;
 
         Gson gson = new Gson();
-        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
+        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, UNICODE));
         writer.beginArray();
 
         while (lists.moveToNext()) {
@@ -547,7 +549,7 @@ public class JsonExportTask extends AsyncTask<Void, Integer, Integer> {
         int numExported = 0;
 
         Gson gson = new Gson();
-        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
+        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, UNICODE));
         writer.beginArray();
 
         while (movies.moveToNext()) {
