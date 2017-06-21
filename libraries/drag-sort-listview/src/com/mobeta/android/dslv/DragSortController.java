@@ -260,6 +260,7 @@ public class DragSortController extends SimpleFloatViewManager
                         mDslv.stopDragWithVelocity(true, 0);
                     }
                 }
+                break;
             case MotionEvent.ACTION_CANCEL:
                 mIsRemoving = false;
                 mDragging = false;
