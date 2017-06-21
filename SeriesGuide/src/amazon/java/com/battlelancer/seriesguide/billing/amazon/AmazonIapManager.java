@@ -3,6 +3,7 @@ package com.battlelancer.seriesguide.billing.amazon;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+
 import com.amazon.device.iap.PurchasingService;
 import com.amazon.device.iap.model.FulfillmentResult;
 import com.amazon.device.iap.model.Product;
@@ -11,11 +12,14 @@ import com.amazon.device.iap.model.Receipt;
 import com.amazon.device.iap.model.UserData;
 import com.battlelancer.seriesguide.R;
 import com.battlelancer.seriesguide.settings.AdvancedSettings;
+
 import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import timber.log.Timber;
 
 public class
@@ -52,7 +56,7 @@ AmazonIapManager {
         public final boolean userHasActivePurchase;
 
         public AmazonIapAvailabilityEvent(boolean subscriptionAvailable, boolean passAvailable,
-                boolean userHasActivePurchase) {
+                                          boolean userHasActivePurchase) {
             this.subscriptionAvailable = subscriptionAvailable;
             this.passAvailable = passAvailable;
             this.userHasActivePurchase = userHasActivePurchase;
@@ -63,7 +67,7 @@ AmazonIapManager {
 
     /**
      * Sets up Amazon IAP.
-     *
+     * <p>
      * <p> Ensure to call this in {@code onCreate} of any activity before making calls to the
      * instance retrieved by {@link #get()}.
      */
@@ -104,7 +108,7 @@ AmazonIapManager {
 
     /**
      * Call this in e.g. {@code onStart} to request data about all available products.
-     *
+     * <p>
      * <p> If successful, a {@link AmazonIapProductEvent} will be posted.
      */
     public void requestProductData() {
@@ -120,10 +124,10 @@ AmazonIapManager {
     /**
      * Call this in {@code onResume} to update the current user's data and to request the latest
      * purchase updates from Amazon.
-     *
+     * <p>
      * <p> If successful, one or more {@link com.battlelancer.seriesguide.billing.amazon.AmazonIapManager.AmazonIapAvailabilityEvent}
      * will be posted.
-     *
+     * <p>
      * <p> In addition on failure, a {@link com.battlelancer.seriesguide.billing.amazon.AmazonIapManager.AmazonIapMessageEvent}
      * with an error message will be posted.
      */
@@ -153,7 +157,7 @@ AmazonIapManager {
      * Checks if the current user has an active subscription or pass purchase. If the purchase of
      * the user is not valid any longer {@link com.battlelancer.seriesguide.billing.amazon.AmazonBillingActivity}
      * is launched.
-     *
+     * <p>
      * <p>If user or purchase data could not be fetched, keeps the last subscription state.
      */
     public void validateSupporterState(Activity activity) {
@@ -186,7 +190,7 @@ AmazonIapManager {
      * Method to set the app's amazon user id and marketplace from IAP SDK responses.
      */
     protected void setAmazonUserId(final String newAmazonUserId,
-            final String newAmazonMarketplace) {
+                                   final String newAmazonMarketplace) {
         userDataAvailable = true;
 
         // Reload everything if the Amazon user has changed.
@@ -263,7 +267,7 @@ AmazonIapManager {
                 grantPurchase(receipt, userData);
             }
         } catch (final Exception e) {
-            throw new RuntimeException(e);
+            throw EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
         }
     }
 
@@ -290,7 +294,7 @@ AmazonIapManager {
                 grantPurchase(receipt, userData);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
         }
     }
 
@@ -314,7 +318,7 @@ AmazonIapManager {
             PurchasingService.notifyFulfillment(receipt.getReceiptId(),
                     FulfillmentResult.FULFILLED);
         } catch (final Exception e) {
-            throw new RuntimeException(e);
+            throw Timber.e("Failed to grant purchase, with error %s", e.getMessage());
         }
     }
 
