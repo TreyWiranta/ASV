@@ -257,13 +257,6 @@ AmazonIapManager {
             } else {
                 // We strongly recommend that you verify the receipt
                 // server-side.
-
-                // don't care for now
-//                if (!verifyReceiptFromYourService(receipt.getReceiptId(), userData)) {
-//                    // if the purchase cannot be verified,
-//                    // show relevant error message to the customer.
-//                    return;
-//                }
                 grantPurchase(receipt, userData);
             }
         } catch (final Exception e) {
@@ -285,11 +278,6 @@ AmazonIapManager {
                 // We strongly recommend that you verify the receipt on server-side.
 
                 // don't care for now
-                //if (!verifyReceiptFromYourService(receipt.getReceiptId(), userData)) {
-                //    // if the purchase cannot be verified,
-                //    // show relevant error message to the customer.
-                //    return;
-                //}
 
                 grantPurchase(receipt, userData);
             }
