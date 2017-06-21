@@ -263,7 +263,7 @@ AmazonIapManager {
                 grantPurchase(receipt, userData);
             }
         } catch (final Exception e) {
-            EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
+            throw new RuntimeException(e);
         }
     }
 
@@ -290,7 +290,7 @@ AmazonIapManager {
                 grantPurchase(receipt, userData);
             }
         } catch (Exception e) {
-            EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
+            throw new RuntimeException(e);
         }
     }
 
@@ -314,9 +314,7 @@ AmazonIapManager {
             PurchasingService.notifyFulfillment(receipt.getReceiptId(),
                     FulfillmentResult.FULFILLED);
         } catch (final Exception e) {
-            // If for any reason the app is not able to fulfill the purchase,
-            // add your own error handling code here.
-            Timber.e("Failed to grant purchase, with error %s", e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
