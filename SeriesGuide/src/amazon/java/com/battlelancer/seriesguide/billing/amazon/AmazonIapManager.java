@@ -260,7 +260,7 @@ AmazonIapManager {
                 grantPurchase(receipt, userData);
             }
         } catch (final Exception e) {
-            throw EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
+            EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
         }
     }
 
@@ -282,7 +282,7 @@ AmazonIapManager {
                 grantPurchase(receipt, userData);
             }
         } catch (Exception e) {
-            throw EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
+            EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
         }
     }
 
@@ -306,7 +306,7 @@ AmazonIapManager {
             PurchasingService.notifyFulfillment(receipt.getReceiptId(),
                     FulfillmentResult.FULFILLED);
         } catch (final Exception e) {
-            throw Timber.e("Failed to grant purchase, with error %s", e.getMessage());
+            Timber.e("Failed to grant purchase, with error %s", e.getMessage());
         }
     }
 
