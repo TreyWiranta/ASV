@@ -185,7 +185,7 @@ public class AmazonBillingActivity extends BaseActivity {
         if (AmazonSku.SERIESGUIDE_PASS.getSku().equals(product.getSku())) {
             if (textViewPricePass != null) {
                 textViewPricePass.setText(
-                        String.format("%s\n%s", price, getString(R.string.billing_price_pass)));
+                        String.format("%s%n%s", price, getString(R.string.billing_price_pass)));
             }
         }
     }
