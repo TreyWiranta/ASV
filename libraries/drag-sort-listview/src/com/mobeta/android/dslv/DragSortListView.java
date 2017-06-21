@@ -166,11 +166,11 @@ public class DragSortListView extends ListView {
     /**
      * Drag state enum.
      */
-    private final static int IDLE = 0;
-    private final static int REMOVING = 1;
-    private final static int DROPPING = 2;
-    private final static int STOPPED = 3;
-    private final static int DRAGGING = 4;
+    private static final int IDLE = 0;
+    private static final int REMOVING = 1;
+    private static final int DROPPING = 2;
+    private static final int STOPPED = 3;
+    private static final int DRAGGING = 4;
 
     private int mDragState = IDLE;
 
@@ -282,26 +282,26 @@ public class DragSortListView extends ListView {
     /**
      * Drag flag bit. Floating View can move in the positive x direction.
      */
-    public final static int DRAG_POS_X = 0x1;
+    public static final int DRAG_POS_X = 0x1;
 
     /**
      * Drag flag bit. Floating View can move in the negative x direction.
      */
-    public final static int DRAG_NEG_X = 0x2;
+    public static final int DRAG_NEG_X = 0x2;
 
     /**
      * Drag flag bit. Floating View can move in the positive y direction. This is subtle. What this
      * actually means is that, if enabled, the floating View can be dragged below its starting
      * position. Remove in favor of upper-bounding item position?
      */
-    public final static int DRAG_POS_Y = 0x4;
+    public static final int DRAG_POS_Y = 0x4;
 
     /**
      * Drag flag bit. Floating View can move in the negative y direction. This is subtle. What this
      * actually means is that the floating View can be dragged above its starting position. Remove
      * in favor of lower-bounding item position?
      */
-    public final static int DRAG_NEG_Y = 0x8;
+    public static final int DRAG_NEG_Y = 0x8;
 
     /**
      * Flags that determine limits on the motion of the floating View. See flags above.
@@ -2685,9 +2685,9 @@ public class DragSortListView extends ListView {
         private long tStart;
         private int scrollDir;
 
-        public final static int STOP = -1;
-        public final static int UP = 0;
-        public final static int DOWN = 1;
+        public static final int STOP = -1;
+        public static final int UP = 0;
+        public static final int DOWN = 1;
 
         private float mScrollSpeed; // pixels per ms
 
