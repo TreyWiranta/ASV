@@ -18,7 +18,8 @@ import java.util.Map;
 import java.util.Set;
 import timber.log.Timber;
 
-public class AmazonIapManager {
+public class
+AmazonIapManager {
 
     public static class AmazonIapMessageEvent {
         public final int messageResId;
@@ -261,7 +262,7 @@ public class AmazonIapManager {
 //                }
                 grantPurchase(receipt, userData);
             }
-        } catch (final Throwable e) {
+        } catch (final Exception e) {
             EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
         }
     }
@@ -288,7 +289,7 @@ public class AmazonIapManager {
 
                 grantPurchase(receipt, userData);
             }
-        } catch (Throwable e) {
+        } catch (Exception e) {
             EventBus.getDefault().post(new AmazonIapMessageEvent(R.string.subscription_failed));
         }
     }
@@ -312,7 +313,7 @@ public class AmazonIapManager {
             AdvancedSettings.setSupporterState(context, true);
             PurchasingService.notifyFulfillment(receipt.getReceiptId(),
                     FulfillmentResult.FULFILLED);
-        } catch (final Throwable e) {
+        } catch (final Exception e) {
             // If for any reason the app is not able to fulfill the purchase,
             // add your own error handling code here.
             Timber.e("Failed to grant purchase, with error %s", e.getMessage());
