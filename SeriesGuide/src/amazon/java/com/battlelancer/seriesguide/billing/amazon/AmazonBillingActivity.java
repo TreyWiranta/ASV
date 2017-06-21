@@ -7,29 +7,42 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import com.amazon.device.iap.PurchasingService;
 import com.amazon.device.iap.model.Product;
 import com.amazon.device.iap.model.RequestId;
 import com.battlelancer.seriesguide.R;
 import com.battlelancer.seriesguide.ui.BaseActivity;
 import com.battlelancer.seriesguide.util.Utils;
+
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import timber.log.Timber;
 
 public class AmazonBillingActivity extends BaseActivity {
 
-    @BindView(R.id.progressBarAmazonBilling) View progressBar;
-    @BindView(R.id.buttonAmazonBillingSubscribe) Button buttonSubscribe;
-    @BindView(R.id.textViewAmazonBillingSubPrice) TextView textViewPriceSub;
-    @BindView(R.id.buttonAmazonBillingGetPass) Button buttonGetPass;
-    @BindView(R.id.textViewAmazonBillingPricePass) TextView textViewPricePass;
-    @BindView(R.id.textViewAmazonBillingExisting) TextView textViewIsSupporter;
-    @BindView(R.id.buttonPositive) Button dismissButton;
-    @BindView(R.id.buttonNegative) Button hiddenButton;
-    @BindView(R.id.textViewAmazonBillingMoreInfo) View buttonMoreInfo;
+    @BindView(R.id.progressBarAmazonBilling)
+    View progressBar;
+    @BindView(R.id.buttonAmazonBillingSubscribe)
+    Button buttonSubscribe;
+    @BindView(R.id.textViewAmazonBillingSubPrice)
+    TextView textViewPriceSub;
+    @BindView(R.id.buttonAmazonBillingGetPass)
+    Button buttonGetPass;
+    @BindView(R.id.textViewAmazonBillingPricePass)
+    TextView textViewPricePass;
+    @BindView(R.id.textViewAmazonBillingExisting)
+    TextView textViewIsSupporter;
+    @BindView(R.id.buttonPositive)
+    Button dismissButton;
+    @BindView(R.id.buttonNegative)
+    Button hiddenButton;
+    @BindView(R.id.textViewAmazonBillingMoreInfo)
+    View buttonMoreInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,18 +188,15 @@ public class AmazonBillingActivity extends BaseActivity {
         if (price == null) {
             price = "--";
         }
-        if (AmazonSku.SERIESGUIDE_SUB_YEARLY.getSku().equals(product.getSku())) {
-            if (textViewPriceSub != null) {
-                textViewPriceSub.setText(
-                        getString(R.string.billing_price_subscribe, price));
-            }
+        if (AmazonSku.SERIESGUIDE_SUB_YEARLY.getSku().equals(product.getSku()) && textViewPriceSub != null) {
+            textViewPriceSub.setText(
+                    getString(R.string.billing_price_subscribe, price));
+        } else {
             return;
         }
-        if (AmazonSku.SERIESGUIDE_PASS.getSku().equals(product.getSku())) {
-            if (textViewPricePass != null) {
-                textViewPricePass.setText(
-                        String.format("%s%n%s", price, getString(R.string.billing_price_pass)));
-            }
+        if (AmazonSku.SERIESGUIDE_PASS.getSku().equals(product.getSku()) && textViewPricePass != null) {
+            textViewPricePass.setText(
+                    String.format("%s%n%s", price, getString(R.string.billing_price_pass)));
         }
     }
 }
