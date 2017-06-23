@@ -24,27 +24,21 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class LookupSeriesTest {
 
 
-    private static final String FAKE_STRING = "HELLO WORLD";
-
     @Mock
     Context mMockContext;
 
 
     @Test
-    //Requirement 5
     public void should_FailToSearchSeries_IfWrongSearchTerm(){
 
     }
 
-
     @Test
-    //Requirement 7
     public void should_ShowRecentlyAiredSeries(){
 
     }
 
     @Test
-    //Requirement 8
     public void should_ShowSeries_When_SearchedByTerm(){
 
 
